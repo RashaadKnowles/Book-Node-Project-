@@ -31,6 +31,7 @@ class Car(db.Model):
     user = db.relationship("User")
 
 # TODO: Add your models below, remember to add a new migration and upgrade database
+<<<<<<< HEAD
 class Review (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.String(255),nullable=False)
@@ -41,3 +42,11 @@ class Review (db.Model):
     user = db.relationship("User")
 
     
+=======
+    id = db.Column(db.Integer, primary_key=True)
+    book_id= db.Column(db.String(255), nullable=False, unique=True)
+    text = db.Column(db.String(255), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User")
+>>>>>>> 00990202f71de0c3c21bde52e654e788c309cbd1
