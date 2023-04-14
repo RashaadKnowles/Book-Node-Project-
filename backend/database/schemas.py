@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
-from database.models import User, Car
+from database.models import User, Car, Review
 
 ma = Marshmallow()
 
@@ -59,3 +59,16 @@ cars_schema = CarSchema(many=True)
 
 
 # TODO: Add your schemas below
+class ReviewSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    book_id = fields.String()
+    text = fields.String()
+    rating = fields.Integer()
+    user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many=False)
+    class Meta:
+        fields = ("id", "book_id", "text", "rating", "user_id", "user")
+
+    @post_load
+    def create_review(self, data, **kwargs):
+        return Review(**data)
