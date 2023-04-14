@@ -59,17 +59,12 @@ cars_schema = CarSchema(many=True)
 
 
 # TODO: Add your schemas below
-<<<<<<< HEAD
 class ReviewSchema(ma.Schema):
-=======
-class BookSchema(ma.Schema):
->>>>>>> 00990202f71de0c3c21bde52e654e788c309cbd1
     id = fields.Integer(primary_key=True)
     book_id = fields.String()
     text = fields.String()
     rating = fields.Integer()
     user_id = fields.Integer()
-<<<<<<< HEAD
     user = ma.Nested(UserSchema, many=False)
     class Meta:
         fields = ("id", "book_id", "text", "rating", "user_id", "user")
@@ -77,6 +72,20 @@ class BookSchema(ma.Schema):
     @post_load
     def create_review(self, data, **kwargs):
         return Review(**data)
-=======
+rewiew_schema = ReviewSchema()
+reviews_schema = ReviewSchema(many=True)
+
+class FavoriteSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    book_id = fields.String()
+    title = fields.String()
+    thumbnail_url = fields.String()
+    user_id = fields.Integer()
     user = ma.Nested(UserSchema, many=False)
->>>>>>> 00990202f71de0c3c21bde52e654e788c309cbd1
+    class Meta:
+        fields = ("id", "book_id", "title", "thumbnail_url", "user_id", "user")
+    @post_load
+    def create_favorite(self, data, **kwargs):
+        return User(**data)
+favorite_schema = FavoriteSchema()
+favorites_schema = FavoriteSchema(many=True)
